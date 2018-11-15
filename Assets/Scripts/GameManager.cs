@@ -4,10 +4,10 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 	[SerializeField] private GameObject _balloonSpawnerPrefab;
-	
-	[SerializeField] private Text _scoreText;
+
 	[SerializeField] private Text _h1Text;
 	[SerializeField] private Text _h2Text;
+	[SerializeField] private Text _scoreText;
 	[SerializeField] private Text _timeToFinishText;
 	
 	[SerializeField] private float _secondsToStartGame = 3f;
@@ -26,11 +26,11 @@ public class GameManager : MonoBehaviour {
 	private int _score;
 	
 	void Start () {
-		StartCoroutine(GameLoop());
 		_h1Text.text = "Balloon Shooter";
+		StartCoroutine(GameLoop());
 	}
 
-	IEnumerator GameLoop() {
+	private IEnumerator GameLoop() {
 		yield return StartCoroutine(WaitForKeyDown(KeyCode.Space));
 		
 		Balloon.OnClick += Score;
@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour {
 		StartCoroutine(SpawnBalloons());
 	}
 	
-	IEnumerator SpawnBalloons() {
+	private IEnumerator SpawnBalloons() {
 		_score = 0;
 		_scoreText.text = "Очки: " + _score;
 		_timeToFinishText.transform.parent.gameObject.SetActive(true);
@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour {
 		StartCoroutine(GameOver());
 	}
 
-	IEnumerator GameOver() {
+	private IEnumerator GameOver() {
 		Balloon.OnClick -= Score;
 		
 		_h1Text.transform.parent.gameObject.SetActive(true);
@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour {
 		StartCoroutine(GameLoop());
 	}
 
-	IEnumerator WaitForKeyDown(KeyCode keyCode) {
+	private IEnumerator WaitForKeyDown(KeyCode keyCode) {
 		while (!Input.GetKeyDown(keyCode)) {
 			yield return null;
 		}
