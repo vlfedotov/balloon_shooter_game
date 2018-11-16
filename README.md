@@ -2,5 +2,6 @@
 
 Сделано на Unity 2018.2.12f1
 
-Запускать Scenes/Main
-
+Запускать:
+* BalloonShooter.exe
+* или из Unity: Scenes/Main
